@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "pili-fdk-aac"
-  s.version          = "1.0.4"
+  s.version          = "0.1.4"
   s.summary          = "Pili iOS fdk aac"
   s.homepage         = "https://github.com/pili-engineering/PLVendorLibs"
   s.license          = 'Apache License, Version 2.0'

@@ -1,6 +1,6 @@
 #!/bin/sh
 # source : http:////github.com/mstorsjo/fdk-aac
-# version : 1.0.4
+# version : 0.1.4
 
 CONFIGURE_FLAGS="--enable-static --with-pic=yes --disable-shared"
 

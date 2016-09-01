@@ -10,20 +10,15 @@
 Pod::Spec.new do |s|
   s.name             = "pili-ffmpeg"
   s.version          = "3.1.0"
-  s.summary          = "Pili iOS ffmpeg"
+  s.summary          = "Pili iOS FFmpeg Library"
   s.homepage         = "https://github.com/pili-engineering/PLVendorLibs"
   s.license          = 'Apache License, Version 2.0'
-  s.author           = { "0dayZh" => "0day.zh@gmail.com" }
-  s.source           = { :git => "https://github.com/pili-engineering/PLVendorLibs.git", :tag => "v#{s.version}" }
+  s.author           = { "hzwangsiyu" => "hzwangsiyu@gmail.com" }
+  s.source           = { :git => "https://github.com/pili-engineering/PLVendorLibs.git", :tag => "v1.0.0" }
 
-  s.platform     = :ios, '7.0'
-  s.requires_arc = true
-
-  s.default_subspec = "precompiled"
-
-  s.subspec "precompiled" do |ss|
-    ss.vendored_libraries   = 'pili-ffmpeg/lib/*.a'
-    ss.preserve_paths         = "pili-ffmpeg/include/**/*.h", 'pili-ffmpeg/lib/*.a'
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/pili-ffmpeg/include" }
-  end
+  s.platform         = :ios, '7.0'
+  s.requires_arc     = true
+  s.vendored_libraries = 'pili-ffmpeg/lib/*.a'
+  s.source_files     = 'pili-ffmpeg/include/**/*.h'
+  s.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => "${PODS_ROOT}/Headers/Public/#{s.name}" }
 end

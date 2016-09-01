@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.requires_arc     = true
   s.source_files     = 'pili-fdk-aac/include/**/*.h'
   s.vendored_libraries  = 'pili-fdk-aac/lib/*.a'
-  s.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => "${PODS_ROOT}/Headers/Public/#{s.name}" }
+  s.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/pili-fdk-aac/include" }
 end

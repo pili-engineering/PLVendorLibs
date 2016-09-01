@@ -19,5 +19,6 @@ Pod::Spec.new do |s|
   s.platform         = :ios, '7.0'
   s.requires_arc     = true
   s.vendored_libraries = 'pili-ffmpeg/lib/*.a'
-  s.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/pili-ffmpeg/include" }
+  s.public_header_files = 'pili-ffmpeg/include/**/*.h'
+  s.header_mappings_dir = 'pili-ffmpeg/include/'
 end

@@ -13,7 +13,13 @@ THIN=`pwd`/"ffmpeg-thin"
 # absolute path to x264 library
 #X264=`pwd`/fat-x264
 
-FDK_AAC=`pwd`/pili-fdk-aac
+#FDK_AAC=`pwd`/pili-fdk-aac
+
+#LIB_VPX=`pwd`/pili-libvpx
+
+SPEEX=`pwd`/pili-speex
+
+OPENSSL=`pwd`/pili-openssl
 
 CONFIGURE_FLAGS="--enable-cross-compile \
 				 --disable-debug \
@@ -26,21 +32,51 @@ CONFIGURE_FLAGS="--enable-cross-compile \
 				 --enable-nonfree \
 				 --enable-avformat \
 				 --enable-swresample \
+				 --enable-decoder=mpeg4 \
 				 --enable-decoder=h264 \
+				 --enable-decoder=hevc \
+				 --enable-decoder=vp8 \
+				 --enable-decoder=vp9 \
 				 --enable-decoder=aac \
 				 --enable-decoder=mp3* \
+				 --enable-decoder=opus \
+				 --enable-decoder=vorbis \
+				 --enable-decoder=nellymoser \
+				 --enable-decoder=rv20 \
+				 --enable-decoder=rv40 \
+				 --enable-decoder=cook \
+				 --enable-decoder=srt \
+				 --enable-decoder=ass \
 				 --enable-demuxer=h264 \
+				 --enable-demuxer=matroska \
 				 --enable-demuxer=aac \
 				 --enable-demuxer=flv \
 				 --enable-demuxer=mpegts \
 				 --enable-demuxer=hls \
 				 --enable-demuxer=mp3 \
 				 --enable-demuxer=mov \
+				 --enable-demuxer=avi \
+				 --enable-demuxer=m4v \
+				 --enable-demuxer=rm \
+				 --enable-demuxer=asf \
+				 --enable-demuxer=ogg \
+				 --enable-demuxer=wav \
+				 --enable-demuxer=srt \
+				 --enable-demuxer=ass \
 				 --enable-parser=h264 \
+				 --enable-parser=hevc \
+				 --enable-parser=vp8 \
+				 --enable-parser=vp9 \
+				 --enable-parser=rv40 \
 				 --enable-parser=aac \
+				 --enable-parser=opus \
+				 --enable-parser=vorbis \
 				 --enable-protocol=http \
+				 --enable-protocol=https \
 				 --enable-protocol=rtmp \
-				 --enable-protocol=hls "
+				 --enable-protocol=hls \
+				 --enable-protocol=file \
+				 --enable-protocol=cache "
 
 if [ "$X264" ]
 then
@@ -49,13 +85,31 @@ fi
 
 if [ "$FDK_AAC" ]
 then
-	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libfdk-aac"
+	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libfdk-aac --enable-decoder=libfdk_aac"
+fi
+
+if [ "$LIB_VPX" ]
+then
+	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libvpx \
+					--enable-decoder=libvpx_vp8 \
+					--enable-decoder=libvpx_vp9"
+fi
+
+if [ "$SPEEX" ]
+then
+	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libspeex --enable-decoder=libspeex"
+fi
+
+if [ "$OPENSSL" ]
+then
+	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-openssl --enable-protocol=tls_openssl"
 fi
 
 # avresample
 #CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-avresample"
 
 ARCHS="armv7 armv7s arm64 x86_64 i386"
+
 COMPILE="y"
 LIPO="y"
 
@@ -141,6 +195,21 @@ then
 		then
 			CFLAGS="$CFLAGS -I$FDK_AAC/include"
 			LDFLAGS="$LDFLAGS -L$FDK_AAC/lib"
+		fi
+		if [ "$LIB_VPX" ]
+		then
+			CFLAGS="$CFLAGS -I$LIB_VPX/include"
+			LDFLAGS="$LDFLAGS -L$LIB_VPX/lib"
+		fi
+		if [ "$SPEEX" ]
+		then
+			CFLAGS="$CFLAGS -I$SPEEX/include"
+			LDFLAGS="$LDFLAGS -L$SPEEX/lib"
+		fi
+		if [ "$OPENSSL" ]
+		then
+			CFLAGS="$CFLAGS -I$OPENSSL/include"
+			LDFLAGS="$LDFLAGS -L$OPENSSL/lib -lssl -lcrypto"
 		fi
 		
 		echo "** CFLAGS=${CFLAGS}"

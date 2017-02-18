@@ -1,0 +1,9 @@
+prefix=/Users/liang/qiniu/project/pili/openssl/scripts/../build/openssl-arm64/output
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenSSL
+Description: Secure Sockets Layer and cryptography libraries and tools
+Version: 1.0.2h
+Requires: libssl libcrypto

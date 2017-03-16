@@ -98,11 +98,13 @@ fi
 if [ "$SPEEX" ]
 then
 	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libspeex --enable-decoder=libspeex"
+	export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$SPEEX/lib/pkgconfig/"
 fi
 
 if [ "$OPENSSL" ]
 then
 	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-openssl --enable-protocol=tls_openssl"
+	export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$OPENSSL/lib/pkgconfig/"
 fi
 
 # avresample

@@ -63,6 +63,8 @@ CONFIGURE_FLAGS="--enable-cross-compile \
 				 --enable-demuxer=wav \
 				 --enable-demuxer=srt \
 				 --enable-demuxer=ass \
+				 --enable-demuxer=rtsp \
+				 --enable-demuxer=rtp \
 				 --enable-parser=h264 \
 				 --enable-parser=hevc \
 				 --enable-parser=vp8 \
@@ -71,6 +73,7 @@ CONFIGURE_FLAGS="--enable-cross-compile \
 				 --enable-parser=aac \
 				 --enable-parser=opus \
 				 --enable-parser=vorbis \
+				 --enable-protocol=rtp \
 				 --enable-protocol=http \
 				 --enable-protocol=https \
 				 --enable-protocol=rtmp \
@@ -98,11 +101,13 @@ fi
 if [ "$SPEEX" ]
 then
 	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libspeex --enable-decoder=libspeex"
+	export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$SPEEX/lib/pkgconfig/"
 fi
 
 if [ "$OPENSSL" ]
 then
 	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-openssl --enable-protocol=tls_openssl"
+	export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$OPENSSL/lib/pkgconfig/"
 fi
 
 # avresample
